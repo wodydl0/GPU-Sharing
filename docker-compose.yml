@@ -1,0 +1,31 @@
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: gpu-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+
+  api:
+    build: .
+    container_name: gpu-session-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+
+      K8S_KUBECONFIG_PATH: "/app/config/kubeconfig"
+    volumes:
+      - ${HOME}/.kube/config:/app/config/kubeconfig:ro
+    depends_on:
+      - redis
+
+
+volumes:
+  redis-data:

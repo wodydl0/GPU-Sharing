@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: gpu-session-api
+
+  profiles:
+    active: local  # ??? local ??? ??

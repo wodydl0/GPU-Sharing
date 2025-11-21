@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# Kubernetes 설정
+k8s:
+  kubeconfig-path: ${K8S_KUBECONFIG_PATH:/app/config/kubeconfig}
+  namespace: gpu
+
+
+logging:
+  level:
+    root: INFO
